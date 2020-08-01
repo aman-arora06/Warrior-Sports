@@ -1,0 +1,14 @@
+body{
+  /* background-image: url("warriors-sports.png");*/
+  background-color:#76ead7
+  /*background-size: 1200px 950px; */
+}
+
+ label {
+  width:120px;
+  display:inline-block;
+}
+#style{
+  display: inline-block;
+  margin-left: 100px;
+}
