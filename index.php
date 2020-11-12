@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -11,65 +12,111 @@
        <link href="https://fonts.googleapis.com/css2?family=Montez&display=swap" rel="stylesheet">
        <link href="https://fonts.googleapis.com/css2?family=Mogra&display=swap" rel="stylesheet">
          <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-
-
       <script type="text/javascript">
-      //A function for button Single
-      // $(document).ready(function(){
-      // var wrap=$(".test");
-      // var button=$(".add_field");
-      // $(button).click(function(s) {
-      // s.preventDefault();
-      // $(wrap).append('<label>Racquet Brand</label><input type="text"/><br><br><label>Racquet Model</label><input type="text"/><br><br><label>String Type</label><input type="text"><br><br><label>String Tension</label><input type="text"/><br><br><label>String Color</label><input type="text"/><br><br>');
-      // });
-      // });
-      //A function for button Multiple
-      $(document).ready(function(){
-        var wrap=$(".test");
-        var button=$(".add_mul_field");
-          $(button).click(function(s) {
-            s.preventDefault();
-                $('.add_another_field').show();
-    });
-  });
+		$(document).on('click','.add_another_field',function(e){
+			e.preventDefault();
+      var count = 2;
+      let demo = $(".increase");
+      if(!(demo.children().length) >= 2){
+          demo.append(" "+'<span class="counter">'+ count + "</span>");
+        }
+			$(".counter").html(function(i,val){
+				return +val+1;
+			});
+		});
 
 
-      // A function for both the buttons to toggle
-      // $(document).ready(function(){
-      // $('.add_field').click(function(){
-      // $('#testing').toggle("slide");
-      // // $('#add').toggle("slide");
-      // });
-      // });
-      // $(document).ready(function(){
-      //   $(.'add_mul_field').click(function(){
-      //     $('#testing').toggle("slide");
-      //     $('.add_another_field').show();
-      //   });
-      // });
-      // // A function for Add Racquet button
-      $(document).ready(function(){
-        var max_field=10;
-        var wrap=$(".test");
-        var button=$(".add_another_field");
-        var x=1;
+    $(document).on('click','.remove_another_field',function(e){
+      e.preventDefault();
+      $(".test").hide();
+      $(".add_another_field").hide();
+      $(".remove_another_field").hide();
 
-        $(button).click(function(s) {
-          s.preventDefault();
-          if(x < max_field){
-          x++;
-
-      $(wrap).append('<label>Racquet Brand</label><input type="text"/><br><br><label>Racquet Model</label><input type="text"/><br><br><label>String Type</label><input type="text"><br><br><label>String Tension</label><input type="text"/><br><br><label>String Color</label><input type="text"/><br><br>');
-      }else{
-        alert("you Reached your limit");
-      }
-      });
       });
       $(document).ready(function(){
-        $('.add').click(function(){
-          $('.MA').show();
-        });
-      });
+  $("input[type='radio']").change(function(){
+  if($(this).val()=="Married")
+  {
+  $(".MA").show();
+  }
+  if($(this).val()=="Unmarried")
+  {
+  $(".MA").hide();
+}
+ });
+});
+var RacquetBrand=[];
+var RacquetModel=[];
+var StringType=[];
+var StringTension=[];
+var StringColor=[];
+var Remarks=[];
+var Amount=[];
+var Cover=[];
+function addUsers(){
+  var inputText=document.getElementById('RacquetBrand').value;
+  var inputText1=document.getElementById('RacquetModel').value;
+  var inputText2=document.getElementById('StringType').value;
+  var inputText3=document.getElementById('StringTension').value;
+  var inputText4=document.getElementById('StringColor').value;
+  var inputText5=document.getElementById('Remarks').value;
+  var inputText6=document.getElementById('RacquetAmount').value;
+  var inputText7=document.getElementById('RacquetCover').value;
+  RacquetBrand.push(inputText);
+    var pval="";
+  for(i=0;i<RacquetBrand.length;i++){
+    pval=pval+RacquetBrand[i]+",";
+  }
+
+  RacquetModel.push(inputText1);
+    var pval1="";
+  for(i=0;i<RacquetModel.length;i++){
+    pval1=pval1+RacquetModel[i]+",";
+  }
+  StringType.push(inputText2);
+    var pval2="";
+  for(i=0;i<StringType.length;i++){
+    pval2=pval2+StringType[i]+",";
+  }
+  StringTension.push(inputText3);
+    var pval3="";
+  for(i=0;i<StringTension.length;i++){
+    pval3=pval3+StringTension[i]+",";
+  }
+  StringColor.push(inputText4);
+    var pval4="";
+  for(i=0;i<StringColor.length;i++){
+    pval4=pval4+StringColor[i]+",";
+  }
+  Remarks.push(inputText5);
+    var pval5="";
+  for(i=0;i<Remarks.length;i++){
+    pval5=pval5+Remarks[i]+",";
+  }
+  Amount.push(parseInt(inputText6));
+    var pval6="";
+  for(i=0;i<Amount.length;i++){
+    pval6=pval6+Amount[i]+",";
+  }
+  Cover.push(inputText7);
+    var pval7="";
+  for(i=0;i<Cover.length;i++){
+    pval7=pval7+Amount[i]+",";
+  }
+
+}
+function setArrayToHidden(){
+  document.getElementById('Brand').value=RacquetBrand;
+  document.getElementById('Model').value=RacquetModel;
+  document.getElementById('String').value=StringType;
+  document.getElementById('Color').value=StringColor;
+  document.getElementById('Tension').value=StringTension;
+  document.getElementById('Amount').value=Amount;
+  document.getElementById('Marks').value=Remarks;
+  document.getElementById('Cover').value=Cover;
+
+}
+
 
 
       </script>
@@ -100,14 +147,15 @@
     </ul>
   </div>
 </nav>
-    <form class="" action="info.php" method="POST" name="add_name" id="add_name">
 
 
+ <form class="" action="index.php" method="POST">
     <div class="container-fluid">
 
       <div class="row">
 
         <div class="col-lg-4">
+
               <section id="Personal">
           <h3 style="padding-bottom:20px" >Personal</h3>
           <label>Title/Name</label>
@@ -142,13 +190,16 @@
                   <input type="tel" name="tel2" value="">
                   <br><br>
 </section>
+
                   </div>
+
 
 
                     <div class="col-lg-4">
                        <section id="Informative">
                     <h3 style="padding-bottom:20px">Informative</h3>
-                    <label >Sports</label>
+
+                         <label >Sports</label>
                       <select name="game">
                         <option value="Badminton">Badminton</option>
                         <option value="Tennis">Tennis</option>
@@ -156,81 +207,88 @@
                         <option value="Other">Other</option>
 
                       </select><br><br>
-                      <div id="testing">
-                      <label>Select Number Of racquets</label><br>
-                      <button  class="add_field">Single</button>
-                      <button  style="margin-left:20px"class="add_mul_field">Multiple</Button><br><br>
 
-                      </div>
+
+
                         <div class="test">
+                            <p class="increase include" style="Font-family:bold">Details of Racquet :<span class="counter">1</span></p>
                         <label class="include"> Racquet Brand</label>
-                         <select  name="brand">
-                          <option value="Yonex">Yonex</option>
-                          <option value="Lining">Lining</option>
-                          <option value="Victor">Victor</option>
-                          <option value="Apacs">Apacs</option>
-                          <option value="head">head</option>
-                          <option value="Wilson">Wilson</option>
-                          <option value="Prince">Prince</option>
-                          <option value="Ashaway">Ashaway</option>
+                        <input class="include" onfocus="this.value=''"type="text" name="brand" id="RacquetBrand" value=""><br><br>
 
-                        </select><br><br>
+                               <input id="Brand" type="hidden" name="hidden_js_brand">
+                                <label class="include" >Racquet Model</label>
+                            <input class="include" onfocus="this.value=''"type="text" name="model" id="RacquetModel" value=""><br><br>
 
-
-                            <label class="include" >Racquet Model</label>
-                            <input class="include"  type="text" name="mytext[]"><br><br>
-
-
-                            <label class="include"  >String Type </label>
-                              <input class="include"  type="text" name="string" value="">
+                               <input id="Model" type="hidden" name="hidden_js_model">
+                            <label class="include">String Type </label>
+                              <input class="include"  onfocus="this.value=''"type="text" name="string"id="StringType"value="">
                               <br><br>
 
-                            <label class="include"  >String Tension </label>
-                              <input class="include"    type="text" name="tension" value="">
+                               <input id="String" type="hidden" name="hidden_js_string">
+                            <label class="include">String Tension </label>
+                              <input class="include"  onfocus="this.value=''"   type="text" name="tension" id="StringTension" value="">
                             <br><br>
-                            <label class="include"  >String Color </label>
-                              <input class="include"  type="text" name="color" value="">
+
+                              <input id="Tension" type="hidden" name="hidden_js_tension">
+                            <label class="include">String Color </label>
+                              <input class="include" onfocus="this.value=''"  type="text" name="color" id="StringColor"value="">
                             <br><br>
-                            <label class="include" >Racquet cover </label>
-                              <select class="include" name="des">
+
+                              <input id="Color" type="hidden" name="hidden_js_color">
+                            <label class="include">Racquet cover</label>
+                              <select id="RacquetCover"class="include" name="des">
                                 <option value="No">No</option>
                                 <option value="Yes">Yes</option>
                               </select>
+                              <input id="Cover" type="hidden" name="hidden_js_cover">
+
                             <br><br>
-    </div>
+                            <label>Amount</label>
+                              <input onfocus="this.value=''"  type="text" name="BA" value="" id="RacquetAmount">
+                            <input id="Amount" type="hidden" name="hidden_js_amount">
+                            <input id="Tamount" type="hidden" name="hidden_js_Tamount">
+                            <br><br>
+                            <label>Remarks</label>
+                              <input type="text"  onfocus="this.value=''"name="remarks" value=""id="Remarks"><br>
+
+                                 <input id="Marks" type="hidden" name="hidden_js_marks">
+    </div><br>
 
 
-                            <button  id="add" class="add_another_field" style="display :none"> ADD racquet</button><br><br>
-                            <label >CollectionDate</label>
+                              <input type="button" onclick="addUsers();" class="add_another_field"name="addRacquet"value="Add Racquet"/>
+                            <button   class="remove_another_field"style="margin-left:50px">No</button><br><br>
+
+                            <label>CollectionDate</label>
                               <input    type="date" name="Colldate" value="">
                             <br><br>
-                            <label  >Exp.DeliveryDate  </label>
+                            <label>Exp.DeliveryDate  </label>
                               <input   type="date" name="exdate" value="">
                           <br><br>
-                            <label   >Bill Amount</label>
-                              <input   type="text" name="BA" value="">
-                            <br><br>
+
 
                           </section>
+
                           </div>
 
 
 
 
 
+
         <div class="col-lg-4">
+
             <section id="Social">
           <h3 style="padding-bottom:20px">Social</h3>
           <label>Date of birth</label>
           <input type="date" name="DOB" value="">
           <br><br>
           <Label>Marital status</label><br>
-          <input type="radio" name="maritalStatus" value="Unmarried">
+          <input  class="marriage"type="radio" name="maritalStatus" value="Unmarried">
           Unmarried
-          <input  class=".add"type="radio" name="maritalStatus" value="Married">
+          <input  class="marriage"type="radio" name="maritalStatus" value="Married">
           Married<br><br>
           <label  class="MA"style="display:none">Marriage Anniversary</label>
-          <input  class="MA"style="display:none" type="date" name="MOA" value="">
+          <input  class="MA"style="display:none" type="date" name="MOA" value="marriage_anni">
           <br><br>
           <label> Email-id</label>
             <input type="email" name="email" value="">
@@ -242,9 +300,9 @@
           <label> Instagram id</label>
             <input type="text" name="insta" value="">
           <br><br>
-          <label>Remarks</label>
-            <input type="text" name="remarks" value="">
+
 </section>
+
         </div>
       </div>
     </div>
@@ -254,16 +312,92 @@
 
 
 
+
     <div class="container" style="text-align:center">
-      <input class="btn btn-info btn-lg" type="Submit" value="Report">
 
-     <input  class="btn btn-primary btn-lg"type="Submit" name="submit" value="Submit">
-     <input  class="btn btn-danger btn-lg"type="Submit" name="" value="Cancel">
+     <input  class="btn btn-primary btn-lg"type="Submit" name="submit" value="Submit" onclick="setArrayToHidden()">
+
+
    </div>
+ </form>
+ <button style="margin-left:54%" onclick="window.location.href='/my_First_client/ready.php'"class="btn btn-danger btn-lg"  value="Report">Report</button>
 
-</form>
+
 
   </body>
 
 
 </html>
+<?php
+$conn=mysqli_connect('localhost','neVISA','neVISA@2020','warriorsports');
+
+if(!$conn){
+  echo 'connection error';
+}
+if(isset($_POST['submit'])){
+$Title=$_POST['title'];
+$name=$_POST['playersName'];
+$gender=$_POST['sex'];
+$Arena=$_POST['stadium'];
+$tel1=$_POST['tel1'];
+$tel2=$_POST['tel2'];
+$Sport=$_POST['game'];
+$data=$_POST['hidden_js_brand'];
+$data1=$_POST['hidden_js_model'];
+$data2=$_POST['hidden_js_string'];
+$data3=$_POST['hidden_js_tension'];
+$data4=$_POST['hidden_js_color'];
+$data5=$_POST['hidden_js_marks'];
+$data6=$_POST['hidden_js_amount'];
+$Tamount=explode(',',$data6);
+$TotalAmount=array_sum($Tamount);
+$data7=$_POST['hidden_js_cover'];
+$del_date=$_POST['exdate'];
+$DOB=$_POST['DOB'];
+$Marriage_anni=$_POST['MOA'];
+$email=$_POST['email'];
+$Fb=$_POST['fb'];
+$Insta=$_POST['insta'];
+
+
+ $sql="INSERT INTO Informative(Title,Name,Stadium,phone1,phone2,Sports,
+   RacquetBrand,RacquetModel,StringType,
+   StringTension,StringColor,RacquetCover,CollectionDate,ExpDeliveryDate,
+ Amount,Remarks,TotalAmount)
+ VALUES('$Title','$name','$Arena','$tel1','$tel2','$Sport','$data',
+   '$data1','$data2','$data3','$data4','$data7',NOW(),
+   '$del_date','$data6','$data5','$TotalAmount')";
+
+ if(!mysqli_query($conn,$sql)){
+   echo " not inserted";
+ }else{
+   echo "inserted";
+ }
+ $details="INSERT INTO social(DateOfBirth,MarriageAnniversary,Email,Facebook,Instagram)
+ VALUES('$DOB','$Marriage_anni','$email','$Fb','$Insta')";
+ if(!mysqli_query($conn,$details)){
+    echo " not inserted";
+ }else{
+    echo "inserted";
+ }
+ if(isset($_POST['submit']))
+ {
+
+   $collected="Dear ".$Title." ".$name. " \nWe have Recieved Your ".$Sport." Racquet ".$data." ".$data1." for stringing on ".date('d-m-Y')." Your Racquet will be strung with ".$data2." at ".$data3." Lbs tension on your request.Your Racquet will be ready by ".$del_date." and charges will be ".$TotalAmount."/-\nThanks for visiting WARRIOR SPORTS (INDIA). ";
+      echo $collected;
+   $url="http://alerts.prioritysms.com/api/web2sms.php";
+   $message = urlencode($collected);// urlencode your message
+   $curl = curl_init();
+   curl_setopt($curl, CURLOPT_POST, 1);// set post data to true
+   curl_setopt($curl, CURLOPT_POSTFIELDS, "workingkey=Acc1ba8bf60dc73d8fc9a417faba6557a&to=$tel1&sender=WRRIOR&message=$message");// post data
+   // query parameter values must be given without squarebrackets.
+    // Optional Authentication:
+   curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+   curl_setopt($curl, CURLOPT_URL, $url);
+   curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+   $result = curl_exec($curl);
+   curl_close($curl);
+   echo $result;
+}
+}
+?>
