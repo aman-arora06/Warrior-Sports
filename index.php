@@ -125,8 +125,8 @@ function setArrayToHidden(){
   </head>
   <body>
     <nav  style="margin-bottom:20px"class="navbar navbar-expand-lg navbar-light bg-#a0ffe6">
-      <img src="warriorSportsLogo.jpg" alt="" height="100px">
-  <a  style="padding-left:20px; font-family:Lobster;font-size:50px; color:green"class="navbar-brand" href="#">Warrior Sports<br><span style="color:#00005c;font-family:Mogra"><h5>Computerised Racquet Stringing <br>   Equipments & accessories</span></h5></a>
+    <!-- <img src="warriorSportsLogo.jpg" alt="" height="100px"> -->
+  <a  style="padding-left:20px; font-family:Lobster;font-size:50px; color:green"class="navbar-brand" href="#">Warrior Sports<br><span style="color:#00005c;font-family:Mogra"><h5 style="margin-left:30px">---BE RESTLESS--- </h5><h5>Computerised Racquet Stringing <br>   Equipments & accessories</span></h5></a>
 
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -358,7 +358,7 @@ $Marriage_anni=$_POST['MOA'];
 $email=$_POST['email'];
 $Fb=$_POST['fb'];
 $Insta=$_POST['insta'];
-
+$new_date=date("d-m-Y",strtotime($del_date));
 
  $sql="INSERT INTO Informative(Title,Name,Stadium,phone1,phone2,Sports,
    RacquetBrand,RacquetModel,StringType,
@@ -373,18 +373,45 @@ $Insta=$_POST['insta'];
  }else{
    echo "inserted";
  }
+ if($data7="yes"){
+   $cover="WithCover";
+
+ }else{
+   $cover="WithoutCover";
+ }
+
  $details="INSERT INTO social(DateOfBirth,MarriageAnniversary,Email,Facebook,Instagram)
  VALUES('$DOB','$Marriage_anni','$email','$Fb','$Insta')";
- if(!mysqli_query($conn,$details)){
-    echo " not inserted";
- }else{
-    echo "inserted";
- }
+ // if(!mysqli_query($conn,$details)){
+ //    echo " not inserted";
+ // }else{
+ //    echo "inserted";
+ // }
  if(isset($_POST['submit']))
  {
+   $brand=explode(",",$data);
+   print_r($brand);
+   $model=explode(",",$data1);
+   print_r($model);
+   $stringtype=explode(",",$data2);
+   print_r($stringtype);
+   $model_count=count($model);
+   $brand_count=count($brand);
+   $stringtype_count=count($stringtype);
+   if($model_count>1 && $brand_count>1 && $stringtype>1){
+      $collected="Dear ".$Title." ".$name. "\nWe've recieved your ".$brand_count." ".$Sport." Racquets for Stringing with following Details: \n";
+      for($i=0;$i<$model_count;$i++){
+        $j=$i+1;
+        $collected.=$j.".".$brand[$i]."/".$model[$i]."/". $stringtype[$i]."\n";
+      }
+      $collected.="Your Racquets will be ready by EOD ".date('d-m-Y',strtotime($del_date))." and Total Charges payable will be Rs.".$TotalAmount." only.\nThanks for visiting Warrior Sports India.\n.";
+  }
+  else{
 
-   $collected="Dear ".$Title." ".$name. " \nWe have Recieved Your ".$Sport." Racquet ".$data." ".$data1." for stringing on ".date('d-m-Y')." Your Racquet will be strung with ".$data2." at ".$data3." Lbs tension on your request.Your Racquet will be ready by ".$del_date." and charges will be ".$TotalAmount."/-\nThanks for visiting WARRIOR SPORTS (INDIA). ";
-      echo $collected;
+   $collected="Dear ".$Title." ".$name. " \nWe've Recieved Your ".$Sport." Racquet ".$data." ".$data1." ".$cover." for stringing on ".date('d-m-Y').". Your Racquet will be strung with ".$data2." at ".$data3." LBS tension Upon Your Request.Your Racquet will be ready by ".$new_date." and charges will be Rs.".$TotalAmount." only.\nThanks for visiting WARRIOR SPORTS (INDIA). ";
+
+    }
+    echo $collected;
    $url="http://alerts.prioritysms.com/api/web2sms.php";
    $message = urlencode($collected);// urlencode your message
    $curl = curl_init();
