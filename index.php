@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -255,8 +253,6 @@ function setArrayToHidden(){
     </div><br>
 
 
-                              <input type="button" onclick="addUsers();" class="add_another_field"name="addRacquet"value="Add Racquet"/>
-                            <button   class="remove_another_field"style="margin-left:50px">No</button><br><br>
 
                             <label>CollectionDate</label>
                               <input    type="date" name="Colldate" value="">
@@ -264,6 +260,9 @@ function setArrayToHidden(){
                             <label>Exp.DeliveryDate  </label>
                               <input   type="date" name="exdate" value="">
                           <br><br>
+
+                            <input type="button" onclick="addUsers();" class="add_another_field"name="addRacquet"value="Add Racquet"/>
+                            <button   class="remove_another_field"style="margin-left:50px">No</button><br><br>
 
 
                           </section>
@@ -316,11 +315,12 @@ function setArrayToHidden(){
     <div class="container" style="text-align:center">
 
      <input  class="btn btn-primary btn-lg"type="Submit" name="submit" value="Submit" onclick="setArrayToHidden()">
+     <input  class="btn btn-primary btn-primary"type="Submit" name="Collected" value="Collected" >
 
 
    </div>
  </form>
- <button style="margin-left:54%" onclick="window.location.href='/my_First_client/ready.php'"class="btn btn-danger btn-lg"  value="Report">Report</button>
+ <button style="margin-left:47.5%" onclick="window.location.href='ready.php'"class="btn btn-danger btn-lg"  value="Report">Report</button>
 
 
 
@@ -329,7 +329,7 @@ function setArrayToHidden(){
 
 </html>
 <?php
-$conn=mysqli_connect('localhost','neVISA','neVISA@2020','warriorsports');
+$conn=mysqli_connect('localhost','root','Champion1@','warriorsports');
 
 if(!$conn){
   echo 'connection error';
@@ -358,7 +358,7 @@ $Marriage_anni=$_POST['MOA'];
 $email=$_POST['email'];
 $Fb=$_POST['fb'];
 $Insta=$_POST['insta'];
-$new_date=date("d-m-Y",strtotime($del_date));
+
 
  $sql="INSERT INTO Informative(Title,Name,Stadium,phone1,phone2,Sports,
    RacquetBrand,RacquetModel,StringType,
@@ -373,12 +373,12 @@ $new_date=date("d-m-Y",strtotime($del_date));
  }else{
    echo "inserted";
  }
- if($data7="yes"){
-   $cover="WithCover";
-
- }else{
-   $cover="WithoutCover";
- }
+ //  if($data7="yes"){
+ //   $cover="WithCover";
+ //
+ // }else{
+ //   $cover="WithoutCover";
+ // }
 
  $details="INSERT INTO social(DateOfBirth,MarriageAnniversary,Email,Facebook,Instagram)
  VALUES('$DOB','$Marriage_anni','$email','$Fb','$Insta')";
@@ -387,31 +387,61 @@ $new_date=date("d-m-Y",strtotime($del_date));
  // }else{
  //    echo "inserted";
  // }
- if(isset($_POST['submit']))
+}
+ if(isset($_POST['Collected']))
  {
+   $collect="SELECT Serial_no,Title,Name,phone1,phone2,Sports,RacquetBrand,RacquetModel,RacquetCover
+    ,StringType,StringColor,StringTension,CollectionDate,ExpDeliveryDate,
+    TotalAmount FROM Informative WHERE Serial_no=(SELECT MAX(Serial_no) FROM Informative)";
+   $res=$conn->query($collect);
+   $row=mysqli_fetch_row($res);
+   $TX_no=$row[0];
+   $Title=$row[1];
+   $Name=$row[2];
+   $ph1=$row[4];
+   $ph2=$row[5];
+   $Sports=$row[6];
+   $data=$row[7];
+   $data1=$row[8];
+   $data2=$row[9];
+   $data3=$row[10];
+   $data4=$row[11];
+   $data7=$row[12];
+   if($data7="yes"){
+    $cover="WithCover";
+
+  }else{
+    $cover="WithoutCover";
+  }
+  $cdate=$row[13];
+  $EOD=$row[14];
+  $Total=$row[17];
+  $new_date=date("d-m-Y",strtotime($EOD));
+
+
    $brand=explode(",",$data);
-   print_r($brand);
+   //print_r($brand);
    $model=explode(",",$data1);
-   print_r($model);
+   //print_r($model);
    $stringtype=explode(",",$data2);
-   print_r($stringtype);
+   //print_r($stringtype);
    $model_count=count($model);
    $brand_count=count($brand);
    $stringtype_count=count($stringtype);
    if($model_count>1 && $brand_count>1 && $stringtype>1){
-      $collected="Dear ".$Title." ".$name. "\nWe've recieved your ".$brand_count." ".$Sport." Racquets for Stringing with following Details: \n";
+      $collected="Dear ".$Title." ".$name. "\nWe've recieved your ".$brand_count." ".$Sports." Racquets for Stringing with following Details: \n";
       for($i=0;$i<$model_count;$i++){
         $j=$i+1;
         $collected.=$j.".".$brand[$i]."/".$model[$i]."/". $stringtype[$i]."\n";
       }
-      $collected.="Your Racquets will be ready by EOD ".date('d-m-Y',strtotime($del_date))." and Total Charges payable will be Rs.".$TotalAmount." only.\nThanks for visiting Warrior Sports India.\n.";
+      $collected.="Your Racquets will be ready by EOD ".date('d-m-Y',strtotime($EOD))." and Total Charges payable will be Rs.".$Total." only.\nThanks for visiting Warrior Sports India.\nTx_no: ".$TX_no.".";
   }
   else{
 
-   $collected="Dear ".$Title." ".$name. " \nWe've Recieved Your ".$Sport." Racquet ".$data." ".$data1." ".$cover." for stringing on ".date('d-m-Y').". Your Racquet will be strung with ".$data2." at ".$data3." LBS tension Upon Your Request.Your Racquet will be ready by ".$new_date." and charges will be Rs.".$TotalAmount." only.\nThanks for visiting WARRIOR SPORTS (INDIA). ";
+   $collected="Dear ".$Title." ".$name. " \nWe've Recieved Your ".$Sports." Racquet ".$data." ".$data1." ".$cover." for stringing on ".date('d-m-Y').". Your Racquet will be strung with ".$data2." at ".$data3." LBS tension Upon Your Request.\nYour Racquet will be ready by ".$new_date." and charges will be Rs.".$Total." only.\nThanks for visiting WARRIOR SPORTS (INDIA).\n Tx_no: ".$TX_no.".";
 
     }
-    echo $collected;
+    //echo $collected;
    $url="http://alerts.prioritysms.com/api/web2sms.php";
    $message = urlencode($collected);// urlencode your message
    $curl = curl_init();
