@@ -31,9 +31,9 @@
         //     }
 
 
-            alert(message);
+            //alert(message);
             //alert(name);
-        }
+        //}
         // function GetReady() {
         //     var grid = document.getElementById("Table1");
         //     var checkBoxes = grid.getElementsByTagName("INPUT");
@@ -144,7 +144,7 @@ if ($result->num_rows > 0) {
     <input type="Submit" name="ready" value="Ready" onclick="GetReady()" />
 
      <input type="Submit" name="self-deliver" value="Self-Delivery"  />
-     <input type="button" name="deliver" value="other-Delivery" onclick="GetDelivered()" />
+     <input type="button" name="delivered" value="other-Delivery" onclick="GetDelivered()" />
 
      <input  id="other-name" style="display: none;"type="text" name="other-name" value="Name" placehoder="Enter your name" />
      <input id="other-number" style="display: none;"type="text" name="other-number" value="Number" placehoder="Enter your number" />
@@ -163,9 +163,10 @@ $conn=mysqli_connect('localhost','neVISA','neVISA@2020','warriorsports');
 
 if(!$conn){
   echo 'connection error';
-}else{
-  echo 'no error';
-}
+ }
+ //else{
+//   echo 'no error';
+// }
 
 
 if(isset($_POST['ready']))
@@ -323,4 +324,3 @@ $conn->close();
 </body>
 
 </html>
-
