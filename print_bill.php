@@ -20,13 +20,12 @@ bode{
 
 }
 @media print {
-body *{
+body {
  visibility:hidden;
+ margin:0;
+ padding:0;
 }
-@page{
-  size:3in 1.5in;
-  size:portrait;
-}
+
 #printable, #printable *{
  visibility: visible;
 }
@@ -36,15 +35,29 @@ body *{
  margin-top:0px;
  margin-right:.125in;
  overflow: hidden;
+ @page{
+   size:3in 1.5in;
+   size:portrait;
+ }
 }
 
 .page-break{
   display:block; page-break-after:always;
 }
+.box{
+  display:block;
+  box-sizing:border-box;
+  width:95mm;
+  height:48mm;
+  float:left;
+  text-align:left;
+  vertical-align: top;
+
+}
 }
 </style>
 <body>
-<div align="center" id="Printable">
+<div align="center" id="Printable" class="box">
 
     <table border style ="border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;">
 
@@ -64,17 +77,16 @@ body *{
         $NRbrand=explode(",",$Rbrand);
         $Rlen=count($NRbrand);
         ?>
-        <!-- // echo $Rlen;
-        // if($Rlen>1){
-        // for($i=0;$i<$Rlen;$i++){ -->
+
+
          <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "DATE OF RECEIPT: ".$newdate." TX:".$row['Serial_no']?></td></tr>
         <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "NAME: ".$row['Name']."    TEL: ".$row['phone1']?></td></tr>
-        <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "CLUB: ".$row['Stadium']?></td><tr>
+        <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "CLUB: ".$row['Stadium'] ?></td><tr>
         <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "RACQUET DETAILS: ".$row['Sports']." ".$row['RacquetBrand']." ".$row['RacquetModel']?></td><tr>
         <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo"STRING/TENSION: ".$row['StringType']."/".$row['StringTension']."LBS"?></td><tr>
        <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "EXP DELIVERY DATE: ".$EOD." Cover: ".$row['RacquetCover']?></td><tr>
         <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo"BILL: ".$row['TotalAmount']?></td><tr>
-        <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo"Powered by: WARRIOR SPORTS(INDIA) +91 -80776683186/9582704145"?></td></tr>
+        <tr><td style=font-size:10px;border-top-width:0px;border-left-width:0px;border-right-width:0px;border-bottom-width:0px;><?php echo "Powered by: WARRIOR SPORTS(INDIA) +91 -80776683186/958270414"?></td></tr>
 
 
 
